@@ -111,134 +111,286 @@
     </header>
 
 
-    <section class="admin-form-section">
+    <!-- TABS NAVIGATION -->
+    <div class="admin-tabs">
+      <button class="admin-tab-btn active" data-tab="content">
+        ARTIST & RELEASES
+      </button>
+      <button class="admin-tab-btn" data-tab="page-settings">
+        PAGE SETTINGS
+      </button>
+      <button class="admin-tab-btn" data-tab="images">
+        IMAGE LIBRARY
+      </button>
+    </div>
 
-      <div class="admin-form-grid">
 
-        <div>
+    <!-- TAB: CONTENT (Artist & Releases) -->
+    <div id="content-tab" class="admin-tab-content active">
 
-          <label for="contentType">
-            CONTENT TYPE
-          </label>
+      <section class="admin-form-section">
 
-          <select id="contentType">
+        <div class="admin-form-grid">
 
-            <option value="artist">
-              Artist Profile
-            </option>
+          <div>
 
-            <option value="release">
-              Music Release
-            </option>
+            <label for="contentType">
+              CONTENT TYPE
+            </label>
 
-          </select>
+            <select id="contentType">
+
+              <option value="artist">
+                Artist Profile
+              </option>
+
+              <option value="release">
+                Music Release
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div>
+
+            <label for="itemName">
+              NAME / TITLE
+            </label>
+
+            <input
+              id="itemName"
+              type="text"
+              placeholder="Enter name or title"
+            >
+
+          </div>
 
         </div>
 
 
-        <div>
+        <label for="itemDescription">
+          DESCRIPTION
+        </label>
 
-          <label for="itemName">
-            NAME / TITLE
-          </label>
+        <textarea
+          id="itemDescription"
+          placeholder="Write a short description"
+        ></textarea>
 
+
+        <label>UPLOAD IMAGE FROM COMPUTER</label>
+
+        <div class="file-upload-container">
           <input
-            id="itemName"
-            type="text"
-            placeholder="Enter name or title"
+            id="itemImageFile"
+            type="file"
+            accept="image/*"
           >
+          <label for="itemImageFile" class="file-upload-label">
+            CHOOSE IMAGE ↗
+          </label>
+          <div id="imagePreview" class="image-preview"></div>
+        </div>
+
+
+        <label for="driveLink">
+          OR PASTE GOOGLE DRIVE IMAGE LINK (Optional)
+        </label>
+
+        <input
+          id="driveLink"
+          type="url"
+          placeholder="Paste Google Drive sharing link (alternative)"
+        >
+
+        <p class="form-hint">
+          You can upload an image from your computer above, or paste a Google Drive link as an alternative.
+          Set the Drive image access to <strong>Anyone with the link — Viewer</strong>.
+        </p>
+
+
+        <div class="admin-actions">
+
+          <button
+            id="saveItem"
+            class="save-btn"
+            type="button"
+          >
+            ADD CONTENT ↗
+          </button>
+
+          <button
+            id="cancelEdit"
+            class="clear-btn"
+            type="button"
+            hidden
+          >
+            CANCEL EDIT
+          </button>
+
+          <button
+            id="importLocal"
+            class="clear-btn"
+            type="button"
+          >
+            IMPORT OLD LOCAL DATA
+          </button>
 
         </div>
 
-      </div>
+        <p id="formMessage" class="form-message"></p>
+
+      </section>
 
 
-      <label for="itemDescription">
-        DESCRIPTION
-      </label>
+      <section class="admin-list-section">
 
-      <textarea
-        id="itemDescription"
-        placeholder="Write a short description"
-      ></textarea>
+        <div class="section-heading">
 
+          <div class="section-number">
+            CMS
+          </div>
 
-      <label for="driveLink">
-        GOOGLE DRIVE IMAGE LINK
-      </label>
+          <div>
 
-      <input
-        id="driveLink"
-        type="url"
-        placeholder="Paste Google Drive sharing link"
-      >
+            <h2>
+              CLOUD CONTENT
+            </h2>
 
-      <p class="form-hint">
-        Set the image access to
-        <strong>Anyone with the link — Viewer</strong>.
-        The system converts the Drive sharing URL into an image URL automatically.
-      </p>
+            <p>
+              EDIT OR DELETE PUBLISHED ITEMS
+            </p>
 
-
-      <div class="admin-actions">
-
-        <button
-          id="saveItem"
-          class="save-btn"
-          type="button"
-        >
-          ADD CONTENT ↗
-        </button>
-
-        <button
-          id="cancelEdit"
-          class="clear-btn"
-          type="button"
-          hidden
-        >
-          CANCEL EDIT
-        </button>
-
-        <button
-          id="importLocal"
-          class="clear-btn"
-          type="button"
-        >
-          IMPORT OLD LOCAL DATA
-        </button>
-
-      </div>
-
-      <p id="formMessage" class="form-message"></p>
-
-    </section>
-
-
-    <section class="admin-list-section">
-
-      <div class="section-heading">
-
-        <div class="section-number">
-          CMS
-        </div>
-
-        <div>
-
-          <h2>
-            CLOUD CONTENT
-          </h2>
-
-          <p>
-            EDIT OR DELETE PUBLISHED ITEMS
-          </p>
+          </div>
 
         </div>
 
-      </div>
+        <div id="adminList" class="admin-list"></div>
 
-      <div id="adminList" class="admin-list"></div>
+      </section>
 
-    </section>
+    </div>
+
+
+    <!-- TAB: PAGE SETTINGS -->
+    <div id="page-settings-tab" class="admin-tab-content" hidden>
+
+      <section class="admin-form-section">
+
+        <div class="section-heading">
+          <div class="section-number">⚙</div>
+          <div>
+            <h2>PAGE SETTINGS</h2>
+            <p>MANAGE WEBSITE SECTIONS</p>
+          </div>
+        </div>
+
+        <label for="settingsSection">
+          SELECT SECTION
+        </label>
+
+        <select id="settingsSection">
+          <option value="hero">Hero / Home Section</option>
+          <option value="about">About Section</option>
+          <option value="contact">Contact Section</option>
+          <option value="social">Social Links</option>
+        </select>
+
+        <label for="settingsTitle">TITLE</label>
+        <input id="settingsTitle" type="text" placeholder="Section title">
+
+        <label for="settingsSubtitle">SUBTITLE</label>
+        <input id="settingsSubtitle" type="text" placeholder="Section subtitle">
+
+        <label for="settingsDescription">DESCRIPTION</label>
+        <textarea id="settingsDescription" placeholder="Section description"></textarea>
+
+        <label>SECTION IMAGE (Optional)</label>
+        <div class="file-upload-container">
+          <input id="settingsImageFile" type="file" accept="image/*">
+          <label for="settingsImageFile" class="file-upload-label">
+            CHOOSE IMAGE ↗
+          </label>
+          <div id="settingsImagePreview" class="image-preview"></div>
+        </div>
+
+        <label for="settingsButtonText">BUTTON TEXT (Optional)</label>
+        <input id="settingsButtonText" type="text" placeholder="e.g., EXPLORE ARTISTS">
+
+        <label for="settingsButtonLink">BUTTON LINK (Optional)</label>
+        <input id="settingsButtonLink" type="text" placeholder="e.g., #artists">
+
+        <div class="admin-actions">
+          <button id="saveSettings" class="save-btn" type="button">
+            SAVE SETTINGS ↗
+          </button>
+        </div>
+
+        <p id="settingsMessage" class="form-message"></p>
+
+      </section>
+
+      <section class="admin-list-section">
+        <div class="section-heading">
+          <div class="section-number">📄</div>
+          <div>
+            <h2>CURRENT SETTINGS</h2>
+            <p>ACTIVE PAGE CONFIGURATIONS</p>
+          </div>
+        </div>
+        <div id="settingsList" class="admin-list"></div>
+      </section>
+
+    </div>
+
+
+    <!-- TAB: IMAGE LIBRARY -->
+    <div id="images-tab" class="admin-tab-content" hidden>
+
+      <section class="admin-form-section">
+
+        <div class="section-heading">
+          <div class="section-number">🖼</div>
+          <div>
+            <h2>IMAGE LIBRARY</h2>
+            <p>MANAGE UPLOADED IMAGES</p>
+          </div>
+        </div>
+
+        <label>UPLOAD NEW IMAGE</label>
+
+        <div class="file-upload-container">
+          <input id="libraryImageFile" type="file" accept="image/*">
+          <label for="libraryImageFile" class="file-upload-label">
+            CHOOSE IMAGE ↗
+          </label>
+          <div id="libraryImagePreview" class="image-preview"></div>
+        </div>
+
+        <div class="admin-actions">
+          <button id="uploadImage" class="save-btn" type="button">
+            UPLOAD IMAGE ↗
+          </button>
+        </div>
+
+        <p id="uploadMessage" class="form-message"></p>
+
+      </section>
+
+      <section class="admin-list-section">
+        <div class="section-heading">
+          <div class="section-number">📸</div>
+          <div>
+            <h2>UPLOADED IMAGES</h2>
+            <p>YOUR IMAGE COLLECTION</p>
+          </div>
+        </div>
+        <div id="imagesList" class="admin-list"></div>
+      </section>
+
+    </div>
 
 
     <footer class="admin-footer">
@@ -248,7 +400,7 @@
       </span>
 
       <span>
-        GOOGLE DRIVE IMAGE LINKS ENABLED
+        LOCAL FILE UPLOAD + PAGE CMS ENABLED
       </span>
 
     </footer>
