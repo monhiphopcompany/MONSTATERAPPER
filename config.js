@@ -1,4 +1,4 @@
-h// ==========================================
+// ==========================================
 // MON HIPHOP - SUPABASE CONFIG
 // ==========================================
 //
@@ -17,6 +17,6 @@ window.MON_HIPHOP_CONFIG = {
     "https://xdjiskvnetnxsiazadzm.supabase.co",
 
   SUPABASE_ANON_KEY:
-    "eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhkamlza3ZuZXRueHNpYXphZHptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEwNDgzMTEsImV4cCI6MjEwNjYyNDMxMX0"
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhkamlza3ZuZXRueHNpYXphZHptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEwNDgzMTEsImV4cCI6MjEwNjYyNDMxMX0.tdStr4yyOzzX-OFwamz8iBCeoEvSW4WxKOSedDuUF5k"
 
 };
