@@ -1,7 +1,10 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const $ = (id) => document.getElementById(id);
+  const $ = id => document.getElementById(id);
+
   const config = window.MON_HIPHOP_CONFIG || {};
-  const configured = config.SUPABASE_URL && config.SUPABASE_ANON_KEY &&
+  const configured =
+    config.SUPABASE_URL &&
+    config.SUPABASE_ANON_KEY &&
     !config.SUPABASE_URL.includes("YOUR-PROJECT") &&
     !config.SUPABASE_ANON_KEY.includes("YOUR_SUPABASE");
 
@@ -13,10 +16,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     sidebar?.classList.remove("open");
     overlay?.classList.remove("show");
   }
+
   $("menuToggle")?.addEventListener("click", () => {
     sidebar.classList.add("open");
     overlay.classList.add("show");
   });
+
   $("closeMenu")?.addEventListener("click", closeSidebar);
   overlay?.addEventListener("click", closeSidebar);
   document.querySelectorAll(".side-nav a").forEach(link => link.addEventListener("click", closeSidebar));
@@ -35,7 +40,47 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (match) id = match[1];
       }
       return id ? "https://drive.google.com/uc?export=view&id=" + encodeURIComponent(id) : url;
-    } catch { return ""; }
+    } catch {
+      return "";
+    }
+  }
+
+  function applyPageSettings(settingsMap) {
+    const hero = settingsMap.hero || {};
+    const about = settingsMap.about || {};
+    const contact = settingsMap.contact || {};
+
+    const heroTitle = document.querySelector(".hero-content h1");
+    const heroSubtitle = document.querySelector(".hero-content .signature");
+    const heroDesc = document.querySelector(".hero-content .hero-description");
+    const heroNote = document.querySelector(".hero-note");
+    const heroBottom = document.querySelector(".hero-bottom");
+    const aboutHeading = document.querySelector(".about-copy h2");
+    const aboutText = document.querySelector(".about-copy p:not(.eyebrow)");
+    const contactText = document.querySelector("footer #contact p");
+
+    if (heroTitle && (hero.title || heroTitle.textContent)) {
+      heroTitle.innerHTML = hero.title || heroTitle.textContent;
+    }
+    if (heroSubtitle && (hero.subtitle || heroSubtitle.textContent)) {
+      heroSubtitle.textContent = hero.subtitle || heroSubtitle.textContent;
+    }
+    if (heroDesc && (hero.description || heroDesc.textContent)) {
+      heroDesc.innerHTML = (hero.description || heroDesc.textContent).replace(/\n/g, "<br>");
+    }
+    if (heroNote && hero.note) heroNote.textContent = hero.note;
+    if (heroBottom && hero.footer) heroBottom.textContent = hero.footer;
+
+    if (aboutHeading && (about.title || aboutHeading.textContent)) {
+      aboutHeading.textContent = about.title || aboutHeading.textContent;
+    }
+    if (aboutText && (about.description || aboutText.textContent)) {
+      aboutText.textContent = about.description || aboutText.textContent;
+    }
+
+    if (contactText && (contact.description || contactText.textContent)) {
+      contactText.innerHTML = (contact.description || contactText.textContent).replace(/\n/g, "<br>");
+    }
   }
 
   function createCard(item, index) {
@@ -54,21 +99,28 @@ document.addEventListener("DOMContentLoaded", async () => {
       placeholder.textContent = String(index + 1).padStart(2, "0");
       card.appendChild(placeholder);
     }
+
     const info = document.createElement("div");
     info.className = "card-info";
+
     const label = document.createElement("small");
     label.textContent = item.type === "artist" ? "MON HIPHOP ARTIST" : "MUSIC RELEASE";
+
     const title = document.createElement("h3");
     title.textContent = item.name;
+
     info.append(label, title);
+
     if (item.description) {
       const description = document.createElement("p");
       description.textContent = item.description;
       info.appendChild(description);
     }
+
     const arrow = document.createElement("span");
     arrow.className = "card-arrow";
     arrow.textContent = "↗";
+
     card.append(info, arrow);
     return card;
   }
@@ -78,11 +130,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const releases = $("releaseGrid");
     artists.innerHTML = "";
     releases.innerHTML = "";
+
     const artistItems = items.filter(item => item.type === "artist");
     const releaseItems = items.filter(item => item.type === "release");
-    (artistItems.length ? artistItems : Array.from({length: 5}, (_, i) => ({type: "artist", name: "ARTIST " + String(i + 1).padStart(2, "0")})))
+
+    (artistItems.length ? artistItems : Array.from({ length: 5 }, (_, i) => ({ type: "artist", name: "ARTIST " + String(i + 1).padStart(2, "0") })))
       .forEach((item, i) => artists.appendChild(createCard(item, i)));
-    (releaseItems.length ? releaseItems : Array.from({length: 5}, (_, i) => ({type: "release", name: "RELEASE " + String(i + 1).padStart(2, "0")})))
+
+    (releaseItems.length ? releaseItems : Array.from({ length: 5 }, (_, i) => ({ type: "release", name: "RELEASE " + String(i + 1).padStart(2, "0") })))
       .forEach((item, i) => releases.appendChild(createCard(item, i)));
   }
 
@@ -99,17 +154,41 @@ document.addEventListener("DOMContentLoaded", async () => {
   const db = createClient(config.SUPABASE_URL, config.SUPABASE_ANON_KEY);
 
   async function loadContent() {
-    const { data, error } = await db.from("content").select("id,type,name,description,drive_link,image,created_at,updated_at").order("created_at", { ascending: true });
+    const { data, error } = await db
+      .from("content")
+      .select("id,type,name,description,drive_link,image,created_at,updated_at")
+      .order("created_at", { ascending: true });
+
     if (error) {
       console.error(error);
       render([]);
       return;
     }
+
     render(data || []);
   }
 
+  async function loadPageSettings() {
+    const { data, error } = await db.from("page_settings").select("*");
+    if (error) {
+      console.error(error);
+      return;
+    }
+    const map = {};
+    for (const row of data || []) {
+      map[row.section] = row;
+    }
+    applyPageSettings(map);
+  }
+
   await loadContent();
+  await loadPageSettings();
+
   db.channel("public-content-sync")
     .on("postgres_changes", { event: "*", schema: "public", table: "content" }, () => loadContent())
+    .subscribe();
+
+  db.channel("public-page-settings-sync")
+    .on("postgres_changes", { event: "*", schema: "public", table: "page_settings" }, () => loadPageSettings())
     .subscribe();
 });
