@@ -5,83 +5,257 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080808">
 <title>MON HIPHOP — Admin</title>
+
 <link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
 <script src="admin.js" defer></script>
 </head>
+
 <body class="admin-page">
+
 <main class="admin-shell">
+
+  <!-- LOGIN -->
   <section id="loginView" class="admin-login">
+
     <div class="admin-header standalone-admin-header">
+
       <div>
         <p class="eyebrow">MON HIPHOP / PRIVATE ADMIN</p>
+
         <h1>ADMIN LOGIN</h1>
-        <p class="admin-subtitle">Sign in with the Supabase Admin account created for this website.</p>
+
+        <p class="admin-subtitle">
+          Sign in with the Supabase Admin account created for this website.
+        </p>
       </div>
-      <a href="index.html" class="outline-btn">VIEW WEBSITE ↗</a>
+
+      <a href="index.html" class="outline-btn">
+        VIEW WEBSITE ↗
+      </a>
+
     </div>
+
     <form id="loginForm" class="admin-form-section">
+
       <label for="email">EMAIL</label>
-      <input id="email" type="email" autocomplete="username" required placeholder="admin@example.com">
+
+      <input
+        id="email"
+        type="email"
+        autocomplete="username"
+        required
+        placeholder="admin@example.com"
+      >
+
       <label for="password">PASSWORD</label>
-      <input id="password" type="password" autocomplete="current-password" required placeholder="Your password">
-      <button class="save-btn" type="submit">SIGN IN ↗</button>
+
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        required
+        placeholder="Your password"
+      >
+
+      <button
+        class="save-btn"
+        type="submit"
+      >
+        SIGN IN ↗
+      </button>
+
       <p id="loginMessage" class="form-message"></p>
+
     </form>
+
   </section>
 
+
+  <!-- ADMIN -->
   <section id="adminView" hidden>
+
     <header class="admin-header standalone-admin-header">
+
       <div>
-        <p class="eyebrow">MON HIPHOP / PRIVATE ADMIN</p>
-        <h1>CONTENT MANAGEMENT</h1>
-        <p class="admin-subtitle">Cloud-synced content management. Changes are available to every device using the public website.</p>
+
+        <p class="eyebrow">
+          MON HIPHOP / PRIVATE ADMIN
+        </p>
+
+        <h1>
+          CONTENT MANAGEMENT
+        </h1>
+
+        <p class="admin-subtitle">
+          Cloud-synced content management.
+          Changes are available to every device using the public website.
+        </p>
+
       </div>
+
       <div class="admin-header-actions">
-        <a href="index.html" class="outline-btn">VIEW WEBSITE ↗</a>
-        <button id="logoutBtn" class="clear-btn">SIGN OUT</button>
+
+        <a href="index.html" class="outline-btn">
+          VIEW WEBSITE ↗
+        </a>
+
+        <button id="logoutBtn" class="clear-btn">
+          SIGN OUT
+        </button>
+
       </div>
+
     </header>
 
+
     <section class="admin-form-section">
+
       <div class="admin-form-grid">
+
         <div>
-          <label for="contentType">CONTENT TYPE</label>
+
+          <label for="contentType">
+            CONTENT TYPE
+          </label>
+
           <select id="contentType">
-            <option value="artist">Artist Profile</option>
-            <option value="release">Music Release</option>
+
+            <option value="artist">
+              Artist Profile
+            </option>
+
+            <option value="release">
+              Music Release
+            </option>
+
           </select>
+
         </div>
+
+
         <div>
-          <label for="itemName">NAME / TITLE</label>
-          <input id="itemName" type="text" placeholder="Enter name or title">
+
+          <label for="itemName">
+            NAME / TITLE
+          </label>
+
+          <input
+            id="itemName"
+            type="text"
+            placeholder="Enter name or title"
+          >
+
         </div>
+
       </div>
-      <label for="itemDescription">DESCRIPTION</label>
-      <textarea id="itemDescription" placeholder="Write a short description"></textarea>
-      <label for="driveLink">GOOGLE DRIVE IMAGE LINK</label>
-      <input id="driveLink" type="url" placeholder="Paste Google Drive sharing link">
-      <p class="form-hint">Set the image access to <strong>Anyone with the link — Viewer</strong>. The system converts the Drive sharing URL into an image URL automatically.</p>
+
+
+      <label for="itemDescription">
+        DESCRIPTION
+      </label>
+
+      <textarea
+        id="itemDescription"
+        placeholder="Write a short description"
+      ></textarea>
+
+
+      <label for="driveLink">
+        GOOGLE DRIVE IMAGE LINK
+      </label>
+
+      <input
+        id="driveLink"
+        type="url"
+        placeholder="Paste Google Drive sharing link"
+      >
+
+      <p class="form-hint">
+        Set the image access to
+        <strong>Anyone with the link — Viewer</strong>.
+        The system converts the Drive sharing URL into an image URL automatically.
+      </p>
+
+
       <div class="admin-actions">
-        <button id="saveItem" class="save-btn" type="button">ADD CONTENT ↗</button>
-        <button id="cancelEdit" class="clear-btn" type="button" hidden>CANCEL EDIT</button>
-        <button id="importLocal" class="clear-btn" type="button">IMPORT OLD LOCAL DATA</button>
+
+        <button
+          id="saveItem"
+          class="save-btn"
+          type="button"
+        >
+          ADD CONTENT ↗
+        </button>
+
+        <button
+          id="cancelEdit"
+          class="clear-btn"
+          type="button"
+          hidden
+        >
+          CANCEL EDIT
+        </button>
+
+        <button
+          id="importLocal"
+          class="clear-btn"
+          type="button"
+        >
+          IMPORT OLD LOCAL DATA
+        </button>
+
       </div>
+
       <p id="formMessage" class="form-message"></p>
+
     </section>
 
+
     <section class="admin-list-section">
+
       <div class="section-heading">
-        <div class="section-number">CMS</div>
-        <div><h2>CLOUD CONTENT</h2><p>EDIT OR DELETE PUBLISHED ITEMS</p></div>
+
+        <div class="section-number">
+          CMS
+        </div>
+
+        <div>
+
+          <h2>
+            CLOUD CONTENT
+          </h2>
+
+          <p>
+            EDIT OR DELETE PUBLISHED ITEMS
+          </p>
+
+        </div>
+
       </div>
+
       <div id="adminList" class="admin-list"></div>
+
     </section>
+
+
     <footer class="admin-footer">
-      <span>MON HIPHOP — ADMIN / SUPABASE SYNC</span>
-      <span>GOOGLE DRIVE IMAGE LINKS ENABLED</span>
+
+      <span>
+        MON HIPHOP — ADMIN / SUPABASE SYNC
+      </span>
+
+      <span>
+        GOOGLE DRIVE IMAGE LINKS ENABLED
+      </span>
+
     </footer>
+
   </section>
+
 </main>
+
 </body>
 </html>
