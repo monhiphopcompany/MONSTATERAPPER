@@ -6,5 +6,5 @@ window.MON_HIPHOP_CONFIG = {
     "https://xdjiskvnetnxsiazadzm.supabase.co",
 
   SUPABASE_ANON_KEY:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9" 
+    "sb_publishable_JWafnSILD4mjgrofDarLGw_GZaFSwVM" 
 };
