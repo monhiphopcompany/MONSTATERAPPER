@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>MON HIPHOP — Mon State Rappers</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="script.js" defer></script>
+</head>
+
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="#home">MON<br>HIPHOP<span>®</span></a>
+
+  <button class="close-menu" id="closeMenu" aria-label="Close menu">×</button>
+
+  <nav class="side-nav">
+    <a href="#home"><span>01</span> HOME</a>
+    <a href="#artists"><span>02</span> ARTISTS</a>
+    <a href="#releases"><span>03</span> RELEASES</a>
+    <a href="#about"><span>04</span> ABOUT</a>
+    <a href="#news"><span>05</span> NEWS</a>
+    <a href="#contact"><span>06</span> CONTACT</a>
+  </nav>
+
+  <div class="side-bottom">
+    <p>MON STATE<br>RAPPERS<br>BY MON HIPHOP</p>
+    <div class="socials">
+      <a href="#">▶</a>
+      <a href="#">◎</a>
+      <a href="#">𝕏</a>
+    </div>
+    <span class="side-copy">INDEPENDENT CULTURE / EST. 2025</span>
+  </div>
+</aside>
+
+<div class="page">
+
+<header class="topbar">
+  <button id="menuToggle" class="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#home" class="mobile-brand">MON HIPHOP</a>
+  <span class="top-label">INDEPENDENT RECORD LABEL</span>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="eyebrow">MON STATE / UNDERGROUND CULTURE</p>
+    <h1>MON STATE<br>RAPPERS</h1>
+    <div class="signature">By Mon HipHop</div>
+    <div class="hero-line"></div>
+    <p class="hero-description">
+      SUPPORTING ARTISTS.<br>
+      BUILDING CULTURE.<br>
+      ONE VOICE. ONE COMMUNITY.
+    </p>
+    <a href="#artists" class="outline-btn">EXPLORE ARTISTS <span>↗</span></a>
+  </div>
+  <div class="hero-note">MON STATE<br>OUR VOICE<br>OUR HIPHOP</div>
+  <div class="hero-index">01 / 06</div>
+  <div class="hero-bottom">MON HIPHOP — KEEP THE CULTURE ALIVE</div>
+</section>
+
+<section class="content-section" id="artists">
+  <div class="section-heading">
+    <div class="section-number">01</div>
+    <div>
+      <h2>ARTISTS</h2>
+      <p>THE ROSTER</p>
+    </div>
+    <a href="#artists" class="view-link">VIEW ARTISTS ↗</a>
+  </div>
+  <div class="artist-grid" id="artistGrid"></div>
+</section>
+
+<section class="content-section releases-section" id="releases">
+  <div class="section-heading">
+    <div class="section-number">02</div>
+    <div>
+      <h2>RELEASES</h2>
+      <p>MUSIC FROM THE LABEL</p>
+    </div>
+    <a href="#releases" class="view-link">VIEW RELEASES ↗</a>
+  </div>
+  <div class="release-grid" id="releaseGrid"></div>
+</section>
+
+<section class="about-section" id="about">
+  <div class="about-image">
+    <div class="about-image-text">REAL HIPHOP<br>REAL STORIES<br>MON STATE</div>
+  </div>
+  <div class="about-copy">
+    <p class="eyebrow">03 / ABOUT US</p>
+    <h2>MON HIPHOP</h2>
+    <p>
+      Mon HipHop is an independent platform dedicated to
+      Mon State rappers, music, creativity, and cultural
+      expression. We provide a space for artists to share
+      their voices, their culture, and their stories.
+    </p>
+    <a href="#contact" class="outline-btn">GET IN TOUCH ↗</a>
+  </div>
+</section>
+
+<section class="content-section news-section" id="news">
+  <div class="section-heading">
+    <div class="section-number">04</div>
+    <div>
+      <h2>NEWS</h2>
+      <p>LATEST UPDATES</p>
+    </div>
+  </div>
+  <div class="news-grid">
+    <article class="news-card">
+      <span>MON HIPHOP / UPDATE</span>
+      <h3>NEW UPDATE COMING SOON</h3>
+      <p>Stay tuned for the latest news and events from Mon HipHop.</p>
+    </article>
+    <article class="news-card">
+      <span>MON HIPHOP / CULTURE</span>
+      <h3>KEEP THE CULTURE ALIVE</h3>
+      <p>Supporting independent voices and creative expression.</p>
+    </article>
+    <article class="news-card">
+      <span>MON HIPHOP / COMMUNITY</span>
+      <h3>ONE VOICE. ONE COMMUNITY.</h3>
+      <p>Celebrating the sound and identity of Mon HipHop.</p>
+    </article>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-top">
+    <a class="brand footer-brand" href="#home">MON<br>HIPHOP<span>®</span></a>
+    <p>MON STATE RAPPERS<br>BY MON HIPHOP</p>
+    <nav>
+      <a href="#home">HOME</a>
+      <a href="#artists">ARTISTS</a>
+      <a href="#releases">RELEASES</a>
+      <a href="#about">ABOUT</a>
+      <a href="#news">NEWS</a>
+    </nav>
+    <div class="footer-socials">▶　◎　𝕏</div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span id="year"></span> MON HIPHOP. ALL RIGHTS RESERVED.</span>
+    <span>KEEP THE CULTURE ALIVE.</span>
+  </div>
+</footer>
+
+</div>
+
+</body>
+</html>
